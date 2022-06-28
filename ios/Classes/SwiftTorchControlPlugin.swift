@@ -35,6 +35,8 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
 
                     } else if (call.method == "stoploop"){
                         timer.invalidate()
+                        device!.torchMode = .off
+isLoopOn = false
         }else{
             result(FlutterMethodNotImplemented)
     }
