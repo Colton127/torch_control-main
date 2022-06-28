@@ -85,6 +85,7 @@ class TorchControlPlugin : FlutterPlugin, MethodCallHandler {
             "stoploop" -> {
 looptimer?.cancel()
                 getTorchControl().turn(false)
+                isLightOn = false
             }
             else -> result.notImplemented()
         }
