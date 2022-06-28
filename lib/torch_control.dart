@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/services.dart';
 
@@ -29,13 +30,21 @@ class TorchControl {
   }
 
   static Future<bool> loop(double frequency, {double torchLevel = 1.0}) async {
-    double getTime = (((1000 / frequency / 2) * 1000) / 1000000);
-    _isOn = await _channel.invokeMethod('loop', {'time': getTime, 'torchLevel': torchLevel});
-    return _isOn;
+    if (Platform.isAndroid) {
+      int time = (1000 / frequency / 2).round();
+      await _channel.invokeMethod('loop', {'time': time});
+      return true;
+    } else {
+      double getTime = (((1000 / frequency / 2) * 1000) / 1000000);
+      _isOn = await _channel.invokeMethod('loop', {'time': getTime, 'torchLevel': torchLevel});
+      return _isOn;
+    }
   }
 
   static Future<void> cancelLoop() async {
-    _isOn = await _channel.invokeMethod('stoploop');
+
+      _isOn = await _channel.invokeMethod('stoploop');
+
   }
 
 //iOS Devices: Calls lockForConfiguration. Required for torch to work. Call this in advance to save performance during strobe.
