@@ -64,6 +64,16 @@ class _MyAppState extends State<MyApp> {
                   child: const Text('On half brightness')),
               TextButton(
                   onPressed: () {
+                    TorchControl.loop(20, torchLevel: 1.0);
+                  },
+                  child: const Text('L00P')),
+              TextButton(
+                  onPressed: () {
+                    TorchControl.cancelLoop();
+                  },
+                  child: const Text('NO L00P')),
+              TextButton(
+                  onPressed: () {
                     TorchControl.turnOff().whenComplete(checkState);
                   },
                   child: const Text('Off')),

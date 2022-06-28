@@ -3,6 +3,10 @@ import UIKit
 import AVFoundation
 
 public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
+    var timer = Timer()
+    var isLoopOn : Bool = false
+    var torchLevel : Float = 1.0
+    let device = AVCaptureDevice.default(for: .video)
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "torch_control", binaryMessenger: registrar.messenger())
         let instance = SwiftTorchControlPlugin()
@@ -20,12 +24,40 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
               } else if (call.method == "lock"){
               let lock = ((call.arguments as! [String: Any])["lock"]) as! Bool;
 
-                  result(lockDeviceConfiguration(lock: lock) )
+
+                   } else if (call.method == "loop"){
+                     lockDeviceConfiguration(lock: true)
+                       timer.invalidate()
+                                let time = (((call.arguments as! [String: Any])["time"]) as! Double);
+            torchLevel = (((call.arguments as! [String: Any])["torchLevel"]) as! NSNumber).floatValue;
+                       timer = Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+
+
+                    } else if (call.method == "stoploop"){
+                        timer.invalidate()
         }else{
             result(FlutterMethodNotImplemented)
     }
     }
+    @objc func timerAction() {
+        
+       do {
+        if (isLoopOn){
+device!.torchMode = .off
+isLoopOn = false
+        }else{
+if (torchLevel == 1.0){
+                try device!.setTorchModeOn(level: AVCaptureDevice.maxAvailableTorchLevel)
+            }else{
+                try device!.setTorchModeOn(level: torchLevel)
+            }
+            isLoopOn = true
+        }
 
+        }catch{
+     }
+       
+    }
     func hasTorch() -> Bool {
         guard let device = AVCaptureDevice.default(for: .video) else { return false }
         return device.hasFlash && device.hasTorch
@@ -45,6 +77,7 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
 return false
       }
     }
+        
 
     func turn(state: Bool, torchLevel: Float) -> Bool {
         guard let device = AVCaptureDevice.default(for: .video) else { return false }

@@ -28,6 +28,16 @@ class TorchControl {
     return _isOn;
   }
 
+  static Future<bool> loop(double frequency, {double torchLevel = 1.0}) async {
+    double getTime = (((1000 / frequency / 2) * 1000) / 1000000);
+    _isOn = await _channel.invokeMethod('loop', {'time': getTime, 'torchLevel': torchLevel});
+    return _isOn;
+  }
+
+  static Future<void> cancelLoop() async {
+    _isOn = await _channel.invokeMethod('stoploop');
+  }
+
 //iOS Devices: Calls lockForConfiguration. Required for torch to work. Call this in advance to save performance during strobe.
   static Future<bool> deviceLock(bool lock) async {
     _isLocked = await _channel.invokeMethod('lock', {'lock': lock});
