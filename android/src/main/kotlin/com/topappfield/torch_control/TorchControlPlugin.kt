@@ -40,6 +40,7 @@ class TorchControlPlugin : FlutterPlugin, MethodCallHandler {
         when (call.method) {
             "turn" -> {
                 val state: Boolean = call.argument<Boolean>("state") ?: false
+                isLightOn = state
                 result.success( getTorchControl().turn(state) )
             }
             "ready" -> {
