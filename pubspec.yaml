@@ -1,0 +1,26 @@
+name: torch_control
+description: A flutter plugin for controlling torch/flashlight/lamp with simple and clean API supporting Android and iOS.
+version: 0.3.0
+homepage: https://github.com/topappfield/torch_control
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.topappfield.torch_control
+        pluginClass: TorchControlPlugin
+      ios:
+        pluginClass: TorchControlPlugin

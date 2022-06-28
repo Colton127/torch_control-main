@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - torch_control (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - torch_control (from `.symlinks/plugins/torch_control/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  torch_control:
+    :path: ".symlinks/plugins/torch_control/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  torch_control: 901b45d343e64509c24c8ab3daec911f1cb291a2
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.11.3
