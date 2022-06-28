@@ -12,7 +12,7 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         if (call.method == "turn") {
             let state = ((call.arguments as! [String: Any])["state"]) as! Bool;
-            let torchLevel = ((call.arguments as! [String: Any])["torchLevel"]) as! Float;
+            let torchLevel = (((call.arguments as! [String: Any])["torchLevel"]) as! NSNumber).floatValue; 
 
             result(turn(state: state, torchLevel: torchLevel) )
         } else if (call.method == "ready"){
