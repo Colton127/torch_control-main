@@ -31,7 +31,7 @@ result(lockDeviceConfiguration(lock: lock))
                                 let time = (((call.arguments as! [String: Any])["time"]) as! Double);
             torchLevel = (((call.arguments as! [String: Any])["torchLevel"]) as! NSNumber).floatValue;
                        timer = Timer.scheduledTimer(timeInterval: time, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-
+timer.fire()
 
                     } else if (call.method == "stoploop"){
                         timer.invalidate()
