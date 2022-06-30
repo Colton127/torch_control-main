@@ -23,10 +23,10 @@ public class SwiftTorchControlPlugin: NSObject, FlutterPlugin {
             result(hasTorch() )
               } else if (call.method == "lock"){
               let lock = ((call.arguments as! [String: Any])["lock"]) as! Bool;
-
+result(lockDeviceConfiguration(lock: lock))
 
                    } else if (call.method == "loop"){
-                     lockDeviceConfiguration(lock: true)
+                     
                        timer.invalidate()
                                 let time = (((call.arguments as! [String: Any])["time"]) as! Double);
             torchLevel = (((call.arguments as! [String: Any])["torchLevel"]) as! NSNumber).floatValue;
