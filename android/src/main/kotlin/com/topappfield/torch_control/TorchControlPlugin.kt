@@ -46,6 +46,14 @@ class TorchControlPlugin : FlutterPlugin, MethodCallHandler {
             "ready" -> {
                 result.success( getTorchControl().ready() )
             }
+            "maxBrightness" -> {
+                result.success( getTorchControl().maxBrightness() )
+            }
+            "setBrightness" -> {
+                val state: Int = call.argument<Int>("brightness") ?: 1
+                result.success( getTorchControl().setBrightness(state) )
+            }
+
             "deviceLock" -> {
                 result.success(true)
             }

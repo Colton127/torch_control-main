@@ -29,6 +29,11 @@ class TorchControl {
     return _isOn;
   }
 
+  static Future<int> setBrightness(int brightness) async {
+    final result = await _channel.invokeMethod('setBrightness', {'brightness': brightness});
+    return result;
+  }
+
   static Future<bool> loop(double frequency, {double torchLevel = 100}) async {
     if (Platform.isAndroid) {
       int time = (1000 / frequency / 2).round();
@@ -49,6 +54,10 @@ class TorchControl {
   static Future<bool> deviceLock(bool lock) async {
     _isLocked = await _channel.invokeMethod('lock', {'lock': lock});
     return _isLocked;
+  }
+
+  static Future<int> maxBrightness() async {
+    return await _channel.invokeMethod('maxBrightness');
   }
 
   /// Turn the flashlight on.

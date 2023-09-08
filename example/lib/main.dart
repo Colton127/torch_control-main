@@ -48,6 +48,42 @@ class _MyAppState extends State<MyApp> {
                   },
                   child: const Text('READY')),
               TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.maxBrightness();
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Get Max Brightness')),
+              TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.setBrightness(1);
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Brightness 1')),
+              TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.setBrightness(2);
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Brightness 2')),
+              TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.setBrightness(3);
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Brightness 3')),
+              TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.setBrightness(4);
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Brightness 4')),
+              TextButton(
+                  onPressed: () async {
+                    final maxBrightness = await TorchControl.setBrightness(5);
+                    print('maxBrightness: $maxBrightness');
+                  },
+                  child: const Text('Brightness 5')),
+              TextButton(
                   onPressed: () {
                     TorchControl.deviceLock(false);
                   },

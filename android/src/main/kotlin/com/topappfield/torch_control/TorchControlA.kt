@@ -39,6 +39,16 @@ class TorchControlA(private val context: Context) : TorchControl() {
         return acquire()
     }
 
+    override fun maxBrightness(): Int {
+        return 1
+     }
+ 
+
+     override fun setBrightness(state: Int): Int {
+return 1
+    }
+
+
     override fun turn(state: Boolean): Boolean {
         if (!ready()) return false;
         // important to do getParameters and then setParameters
